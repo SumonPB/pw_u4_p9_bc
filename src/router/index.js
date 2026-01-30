@@ -1,6 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import MostrarTodos from '@/views/MostrarTodosView.vue'
+import MostrarPorIdView from '@/views/MostrarPorIdView.vue'
+import GuardarView from '@/views/GuardarView.vue'
+import ActualizarView from '@/views/ActualizarView.vue'
+import ActualizarParcialComponent from '@/components/ActualizarParcialComponent.vue'
+import EliminarComponent from '@/components/EliminarComponent.vue'
+import ActualizarParcialView from '@/views/ActualizarParcialView.vue'
+import EliminarView from '@/views/EliminarView.vue'
 
 const routes = [
   {
@@ -20,7 +27,29 @@ const routes = [
     path:"/showAll",
     name:"showall",
     component: MostrarTodos
-  }
+  },
+   {
+    path:"/showById",
+    name:"showbyid",
+    component: MostrarPorIdView
+  },   {
+    path:"/save",
+    name:"save",
+    component: GuardarView
+  },   {
+    path:"/actualizar",
+    name:"actualizar",
+    component: ActualizarView
+  },   {
+    path:"/actualizarParcialmente",
+    name:"actualizarParcialmente",
+    component: ActualizarParcialView
+  }, {
+    path:"/eliminar",
+    name:"eliminar",
+    component: EliminarView
+  },
+  
 ]
 
 const router = createRouter({

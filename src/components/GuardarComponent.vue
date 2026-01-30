@@ -1,0 +1,115 @@
+<template>
+  <form @submit.prevent="guardarEstudiante" class="form-estudiante">
+    <label>Nombre:</label>
+    <input type="text" v-model="estudiante.nombre" required>
+
+    <label>Apellido:</label>
+    <input type="text" v-model="estudiante.apellido" required>
+
+    <label>Fecha de Nacimiento:</label>
+    <input type="datetime-local" v-model="estudiante.fechaNacimiento" required>
+
+    <label>Provincia:</label>
+    <input type="text" v-model="estudiante.provincia" required>
+
+    <label>Género:</label>
+    <input type="text" v-model="estudiante.genero" required>
+
+    <button type="submit">Guardar Estudiante</button>
+  </form>
+</template>
+
+<script>
+import { guardarFachada } from "../Client/MatriculaClient.js";
+import router from '../router';
+export default {
+  data() {
+    return {
+      estudiante: {
+        nombre: "",
+        apellido: "",
+        fechaNacimiento: "",
+        provincia: "",
+        genero: ""
+      }
+    };
+  },
+  methods: {
+    async guardarEstudiante() {
+      try {
+        await guardarFachada(this.estudiante);
+        this.estudiante = {
+          nombre: "",
+          apellido: "",
+          fechaNacimiento: "",
+          provincia: "",
+          genero: ""
+        };
+        setTimeout(async () => {
+                await router.push({ name: 'about' })
+            }, 1500)
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
+};
+</script>
+
+
+<style scoped>
+.form-estudiante {
+  max-width: 520px;
+  margin: 60px auto;
+  padding: 30px 35px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form-estudiante label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.form-estudiante input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-estudiante input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.form-estudiante button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.form-estudiante button:hover {
+  background-color: #1d4ed8;
+}
+
+.form-estudiante button:active {
+  transform: scale(0.98);
+}
+</style>
