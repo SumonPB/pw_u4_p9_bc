@@ -33,6 +33,10 @@
 import {
   consultarTodosFachada,
 } from "../Client/MatriculaClient.js";
+import {
+  obtenerTokenFacade,
+} from "../Client/AutorizationClient.js";
+
 export default {
   data() {
     return{
@@ -45,6 +49,7 @@ export default {
   },
   methods: {
     async consultar() {
+      await obtenerTokenFacade();
       return await consultarTodosFachada();
     }
   }
