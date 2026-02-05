@@ -5,8 +5,8 @@ const URL = "http://localhost:8082/auth/token";
 
 const obtenerToken = async () => {
     const payload = {
-        username: "admin4",
-        password: "admin123"
+        username: "admin",
+        password: "admin"
     };
     //el header se usa para que axiois mande al aut un json caso contrario envia cosas extrañas
     const { data } = await axios.post(URL, payload, {
