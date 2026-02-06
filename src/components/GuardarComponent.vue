@@ -45,6 +45,7 @@ export default {
           provincia: "",
           genero: ""
         };
+
         setTimeout(async () => {
                 await router.push({ name: 'about' })
             }, 1500)

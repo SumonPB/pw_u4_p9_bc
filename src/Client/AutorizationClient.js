@@ -9,15 +9,10 @@ const obtenerToken = async (user,password) => {
         password: password
     };
     //el header se usa para que axiois mande al aut un json caso contrario envia cosas extrañas
-    const { data } = await axios.post(URL, payload, {
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
-    return data.accessToken;
+    const  response  = await axios.post(URL, payload);
+    return response.data.accessToken;
 };
 
-export const obtenerTokenFacade = async () => {
-
-    return await obtenerToken();
+export const obtenerTokenFacade = async (user,password) => {
+    return await obtenerToken(user,password);
 }

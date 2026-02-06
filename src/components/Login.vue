@@ -3,7 +3,7 @@
     <h2>Login</h2>
     <input type="text" placeholder="Usuario" v-model="usuario" required>
     <input type="password" placeholder="Contraseña" v-model="password" required>
-    <button @:click="login()">Entrar</button>
+    <button @:click="login">Entrar</button>
   </div>
 </template>
 
@@ -18,13 +18,14 @@ export default {
     }
   },
   methods:{
-    login(){
+    async login(){
       //***llamamos a obtener el token */
-      const TOKEN= obtenerTokenFacade(this.usuario,this.password)
+      const TOKEN= await obtenerTokenFacade(this.usuario,this.password)
       if(TOKEN !==null){
-        console.log(TOKEN)
         localStorage.setItem("token",TOKEN)
         localStorage.setItem("estaAutenticado",true)
+        console.log("Autentificado con exito")
+        console.log("Token: "+ localStorage.getItem("token"));
         router.push({ name: 'about' })
       }else{
         console.log("Error de Autenticacion")
