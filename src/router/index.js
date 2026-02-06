@@ -4,10 +4,9 @@ import MostrarTodos from '@/views/MostrarTodosView.vue'
 import MostrarPorIdView from '@/views/MostrarPorIdView.vue'
 import GuardarView from '@/views/GuardarView.vue'
 import ActualizarView from '@/views/ActualizarView.vue'
-import ActualizarParcialComponent from '@/components/ActualizarParcialComponent.vue'
-import EliminarComponent from '@/components/EliminarComponent.vue'
 import ActualizarParcialView from '@/views/ActualizarParcialView.vue'
 import EliminarView from '@/views/EliminarView.vue'
+import Login from '@/components/Login.vue'
 
 const routes = [
   {
@@ -26,6 +25,15 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+    meta: {
+      requiereAutorizacion: false,
+      esPublica: true
+    }
+  },
+    {
+    path: '/login',
+    name: 'login',//el nombre es importante debido a que es el que usa para redirigir a esa pagina
+    component: Login,
     meta: {
       requiereAutorizacion: false,
       esPublica: true
@@ -96,7 +104,14 @@ router.beforeEach((
 //cuerpo de la validacion
 if(to.meta.requiereAutorizacion){
   /*se envia a una pagina de login*/
+  const estaAutenticado = localStorage.getItem("estaAutenticado");
+  if(!estaAutenticado){
   console.log("Redirigiendo al login")
+  next({name:'login'});
+  }else{
+    next();
+  }
+
 }else{
   /**Le dejo que pase sin que valide*/
   console.log("Pase Libre")

@@ -32,18 +32,11 @@
 </template>
 
 <script>
-import {
-  tokenMasterFacade
-} from "../Client/MatriculaClient.js";
-
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
-  },//cargar el token antes de iniciar la app
-  async beforeMount() {
-    await tokenMasterFacade();
-  },
+  }
 }
 </script>
 

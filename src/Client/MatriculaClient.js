@@ -1,11 +1,8 @@
 import axios from "axios";
 import {obtenerTokenFacade} from "../Client/AutorizationClient"
-let TOKEN = "";
+let TOKEN = localStorage.getItem("token");
 const URL = "http://localhost:8081/matricula/api/v1.0/estudiantes"
 
-const TokenMaster = async() =>{
-    return TOKEN = await obtenerTokenFacade();
-}
 
 const consultarTodos = async () => {
     const data = await axios.get(`${URL}`,{headers:{
@@ -90,6 +87,4 @@ export const borrarFachada = async (id) => {
     return await borrar(id)
 }
 
-export const tokenMasterFacade = async() => {
-  return await TokenMaster()
-}
+
